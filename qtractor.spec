@@ -1,51 +1,52 @@
 Summary:	Audio/MIDI multi-track sequencer
+Summary(pl.UTF-8):	Wielościeżkowy sekwencer dźwięku/MIDI
 Name:		qtractor
 Version:	0.5.8
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications
 Source0:	http://downloads.sourceforge.net/qtractor/%{name}-%{version}.tar.gz
 # Source0-md5:	22abf4de4d5736f794e174ef06fe3a3c
-Patch0:		%{name}-desktop.patch
 URL:		http://qtractor.sourceforge.net/
-BuildRequires:	QtGui-devel
-BuildRequires:	QtXml-devel
+BuildRequires:	QtGui-devel >= 4.2
+BuildRequires:	QtXml-devel >= 4.2
 BuildRequires:	alsa-lib-devel
-BuildRequires:	dssi
+BuildRequires:	dssi-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	jack-audio-connection-kit-devel
 BuildRequires:	ladspa-devel
-BuildRequires:	liblilv-devel
+BuildRequires:	liblo-devel
 BuildRequires:	libmad-devel
 BuildRequires:	libsamplerate-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel
-#BuildRequires:	libsuil-devel
 BuildRequires:	libvorbis-devel
-BuildRequires:	rubberband-devel
-#BuildRequires:	vst-plugins-sdk
-Requires(post,postun):	hicolor-icon-theme
-# for lv2 plugins
-#Requires:	libsuil-gui-support
+BuildRequires:	lilv-devel
+BuildRequires:	lv2-devel
+BuildRequires:	qt4-build
 BuildRequires:	qt4-linguist
+BuildRequires:	rubberband-devel
+BuildRequires:	suil-devel
+Requires(post,postun):	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Audio/MIDI multi-track sequencer.
 
+%description -l pl.UTF-8
+Wielościeżkowy sekwencer dźwięku/MIDI.
+
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %{__autoheader}
 %{__autoconf}
 %configure \
-	--disable-slv2	\
+	--enable-lilv	\
+	--enable-suil	\
+	--localedir=%{_datadir}/%{name}/translations
 
-#	--enable-lilv	\
-#	--enable-suil	\
-#	--with-vst=%{_includedir}/vst
 %{__make}
 
 %install
@@ -66,7 +67,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/qtractor
 %{_desktopdir}/*.desktop
-%{_iconsdir}/hicolor/*/apps/*.png
-
+%{_iconsdir}/hicolor/32x32/*/*.png
+%{_datadir}/mime/packages/qtractor.xml
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/translations
+%{_datadir}/%{name}/translations/*.qm
