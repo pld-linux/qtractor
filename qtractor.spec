@@ -46,7 +46,7 @@ Wielościeżkowy sekwencer dźwięku/MIDI.
 %{__autoheader}
 %{__autoconf}
 %configure \
-	--with-qt5=/usr/lib64/qt5 \
+	--with-qt5=%{_libdir}/qt5 \
 	--enable-lilv	\
 	--enable-suil	\
 	--localedir=%{_datadir}/%{name}/translations
