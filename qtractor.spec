@@ -23,8 +23,8 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	lilv-devel
 BuildRequires:	lv2-devel
-BuildRequires:	qt4-build
-BuildRequires:	qt4-linguist
+BuildRequires:	qt5-build
+BuildRequires:	qt5-linguist
 BuildRequires:	rubberband-devel
 BuildRequires:	suil-devel
 BuildRequires:	zlib-devel
