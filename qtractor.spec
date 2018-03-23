@@ -1,15 +1,15 @@
 Summary:	Audio/MIDI multi-track sequencer
 Summary(pl.UTF-8):	Wielościeżkowy sekwencer dźwięku/MIDI
 Name:		qtractor
-Version:	0.5.8
+Version:	0.9.0
 Release:	1
 License:	GPL v2
 Group:		X11/Applications
-Source0:	http://downloads.sourceforge.net/qtractor/%{name}-%{version}.tar.gz
-# Source0-md5:	22abf4de4d5736f794e174ef06fe3a3c
-URL:		http://qtractor.sourceforge.net/
-BuildRequires:	QtGui-devel >= 4.2
-BuildRequires:	QtXml-devel >= 4.2
+Source0:	https://downloads.sourceforge.net/qtractor/%{name}-%{version}.tar.gz
+# Source0-md5:	e8b1955b29abbe84e94d7ed05d260b8d
+URL:		https://qtractor.sourceforge.io/
+BuildRequires:	Qt5Gui-devel >= 5.1
+BuildRequires:	Qt5Xml-devel >= 5.1
 BuildRequires:	alsa-lib-devel
 BuildRequires:	dssi-devel
 BuildRequires:	gtk+-devel
@@ -27,6 +27,9 @@ BuildRequires:	qt4-build
 BuildRequires:	qt4-linguist
 BuildRequires:	rubberband-devel
 BuildRequires:	suil-devel
+BuildRequires:	zlib-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libX11-devel
 Requires(post,postun):	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,6 +46,7 @@ Wielościeżkowy sekwencer dźwięku/MIDI.
 %{__autoheader}
 %{__autoconf}
 %configure \
+	--with-qt5=/usr/lib64/qt5 \
 	--enable-lilv	\
 	--enable-suil	\
 	--localedir=%{_datadir}/%{name}/translations
@@ -68,9 +72,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/qtractor
+%attr(755,root,root) %{_bindir}/qtractor_plugin_scan
+%{_mandir}/man1/qtractor.1*
+%lang(fr) %{_mandir}/man1/qtractor.fr.1*
 %{_desktopdir}/*.desktop
-%{_iconsdir}/hicolor/32x32/*/*.png
+%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/hicolor/scalable/*/*.svg
 %{_datadir}/mime/packages/qtractor.xml
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/translations
 %{_datadir}/%{name}/translations/*.qm
+%{_datadir}/metainfo/qtractor.appdata.xml
