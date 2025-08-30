@@ -16,7 +16,7 @@ Summary:	Audio/MIDI multi-track sequencer
 Summary(pl.UTF-8):	Wielościeżkowy sekwencer dźwięku/MIDI
 Name:		qtractor
 Version:	1.5.8
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications
 Source0:	https://downloads.sourceforge.net/qtractor/%{name}-%{version}.tar.gz
@@ -113,8 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README README.VST2 TRANSLATORS
 %attr(755,root,root) %{_bindir}/qtractor
-%dir %{_libexecdir}/qtractor
-%attr(755,root,root) %{_libexecdir}/qtractor/qtractor_plugin_scan
+%dir %{_libdir}/qtractor
+%attr(755,root,root) %{_libdir}/qtractor/qtractor_plugin_scan
 %{_datadir}/mime/packages/org.rncbc.qtractor.xml
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/audio
